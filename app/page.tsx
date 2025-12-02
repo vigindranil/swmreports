@@ -6,6 +6,8 @@ import { BarChart3, TrendingUp, Package, RefreshCw, Download, Calendar, MapPin }
 import FilterSection from "@/components/filter-section"
 import DataTable from "@/components/data-table"
 import WasteChart from "@/components/waste-chart"
+import LocationWasteTable from "@/components/location-waste-table"
+import LocationWasteChart from "@/components/location-waste-chart"
 
 interface WasteData {
   ID: number
@@ -17,9 +19,22 @@ interface WasteData {
   TotalActiveProperty: number
 }
 
+interface LocationWasteData {
+  LocationID: number
+  LocationName: string
+  [key: string]: string | number
+}
+
 interface ApiResponse {
   success: boolean
   data: WasteData[]
+  count: number
+  error?: string
+}
+
+interface LocationWasteApiResponse {
+  success: boolean
+  data: LocationWasteData[]
   count: number
   error?: string
 }
@@ -36,6 +51,7 @@ export default function Page() {
   })
 
   const [data, setData] = useState<WasteData[]>([])
+  const [locationWasteData, setLocationWasteData] = useState<LocationWasteData[]>([])
   const [loading, setLoading] = useState(false)
   const [reportTitle, setReportTitle] = useState("State Wise Collection Report")
 
@@ -53,6 +69,7 @@ export default function Page() {
       })
       console.log(params.toString());
 
+      // Fetch waste report data
       const response = await fetch(`/api/waste-report?${params}`)
       const result: ApiResponse = await response.json()
       console.log(result)
@@ -61,6 +78,17 @@ export default function Page() {
         setData(result.data)
       } else {
         console.error("[v0] API error:", result.error)
+      }
+
+      // Fetch location-wise property waste report data
+      const locationResponse = await fetch(`/api/location-wise-property-waste-report?${params}`)
+      const locationResult: LocationWasteApiResponse = await locationResponse.json()
+      console.log(locationResult)
+
+      if (locationResult.success) {
+        setLocationWasteData(locationResult.data)
+      } else {
+        console.error("[v0] Location API error:", locationResult.error)
       }
     } catch (error) {
       console.error("[v0] Error fetching data:", error)
@@ -222,6 +250,46 @@ export default function Page() {
             </div>
           )}
         </div>
+
+        {/* Location-wise Property Waste Report Section */}
+        {locationWasteData.length > 0 && (
+          <div className="mt-12">
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg shadow-lg">
+                  <MapPin className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-slate-800">Location-wise Property Waste Analysis</h2>
+                  <p className="text-slate-600 mt-1">Property-type wise waste collection across locations</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Location Chart Section */}
+            <Card className="border-0 shadow-xl bg-white overflow-hidden mb-8">
+              <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-slate-800 flex items-center gap-2">
+                      <BarChart3 className="w-5 h-5 text-blue-600" />
+                      Location Wise Waste Distribution
+                    </CardTitle>
+                    <CardDescription className="mt-1">Property-type wise waste analysis by location</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <LocationWasteChart data={locationWasteData} />
+              </CardContent>
+            </Card>
+
+            {/* Location Data Table Section */}
+            <div className="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
+              <LocationWasteTable data={locationWasteData} reportTitle="Location-wise Property Waste Report" />
+            </div>
+          </div>
+        )}
 
         {/* Enhanced Empty State */}
         {data.length === 0 && !loading && (

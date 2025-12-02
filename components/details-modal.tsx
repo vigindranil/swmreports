@@ -167,17 +167,15 @@ export default function DetailsModal({ isOpen, onClose, selectedLocation, filter
               <DialogTitle className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 Property-wise Waste Details
               </DialogTitle>
-              <DialogDescription className="text-base mt-3">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-teal-600 rounded-full"></div>
-                    <p className="text-slate-800 font-bold text-xl">{selectedLocation?.name}</p>
-                  </div>
-                  <p className="text-slate-600 ml-4 font-medium">
-                    📅 {filters.month} {filters.year}
-                  </p>
+              <div className="space-y-2 mt-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-teal-600 rounded-full"></div>
+                  <p className="text-slate-800 font-bold text-xl">{selectedLocation?.name}</p>
                 </div>
-              </DialogDescription>
+                <p className="text-slate-600 ml-4 font-medium">
+                  📅 {filters.month} {filters.year}
+                </p>
+              </div>
             </div>
             <Button
               onClick={exportToExcel}

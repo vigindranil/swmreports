@@ -56,6 +56,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../../app/api/location-wise-property-waste-report/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/location-wise-property-waste-report">> = Specific
+  const handler = {} as typeof import("../../../app/api/location-wise-property-waste-report/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/api/property-waste-report/route.ts
 {
   type __IsExpected<Specific extends RouteHandlerConfig<"/api/property-waste-report">> = Specific
