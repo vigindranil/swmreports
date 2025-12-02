@@ -48,6 +48,8 @@ export default function Page() {
     blockID: 0,
     gpID: 0,
     level: 1,
+    startDate: undefined as Date | undefined,
+    endDate: undefined as Date | undefined,
   })
 
   const [data, setData] = useState<WasteData[]>([])
@@ -67,6 +69,15 @@ export default function Page() {
         gpID: filters.gpID.toString(),
         level: filters.level.toString(),
       })
+
+      // Add dates if selected
+      if (filters.startDate) {
+        params.append("startDate", filters.startDate.toISOString().split("T")[0])
+      }
+      if (filters.endDate) {
+        params.append("endDate", filters.endDate.toISOString().split("T")[0])
+      }
+
       console.log(params.toString());
 
       // Fetch waste report data

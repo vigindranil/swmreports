@@ -1,80 +1,24 @@
-[00:00:00.566] Server  LOG      ✓ Ready in 372ms
-[00:00:07.573] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:07.837] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:07.837] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:07.837] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.0","sv":"0.1.3","ts":1764671216660}
-[00:00:14.517] Browser LOG     month=August&year=2025&stateID=1&districtID=9&blockID=0&gpID=0&level=1
-[00:00:15.491] Browser LOG     {"count":9,"data":[{"ID":76,"Inorganic_WasteAmount":"10.40","Name":"Banarhat","Organic_WasteAmount":"10.05","TotalActiveProperty":23,"TotalProperty":416,"WasteAmount":"20.45"},{"ID":75,"Inorganic_WasteAmount":"322.45","Name":"Dhupguri","Organic_WasteAmount":"20.38","TotalActiveProperty":64,"TotalProperty":579,"WasteAmount":"342.83"},{"ID":81,"Inorganic_WasteAmount":"532.31","Name":"JALPAIGURI SADAR","Organic_WasteAmount":"311.85","TotalActiveProperty":58,"TotalProperty":737,"WasteAmount":"844.16"},{"ID":80,"Inorganic_WasteAmount":"135.19","Name":"Kranti","Organic_WasteAmount":"15.03","TotalActiveProperty":52,"TotalProperty":508,"WasteAmount":"150.22"},{"ID":88,"Inorganic_WasteAmount":"0.37","Name":"MALBAZAR","Organic_WasteAmount":"0.27","TotalActiveProperty":2,"TotalProperty":369,"WasteAmount":"0.64"},{"ID":78,"Inorganic_WasteAmount":"302.70","Name":"Matiali","Organic_WasteAmount":"418.30","TotalActiveProperty":194,"TotalProperty":1496,"WasteAmount":"721.00"},{"ID":73,"Inorganic_WasteAmount":"11975.31","Name":"Maynaguri","Organic_WasteAmount":"12845.79","TotalActiveProperty":525,"TotalProperty":9571,"WasteAmount":"24821.10"},{"ID":79,"Inorganic_WasteAmount":"890.57","Name":"Nagrakata","Organic_WasteAmount":"643.10","TotalActiveProperty":208,"TotalProperty":1094,"WasteAmount":"1533.67"},{"ID":74,"Inorganic_WasteAmount":"86.69","Name":"Rajganj","Organic_WasteAmount":"564.02","TotalActiveProperty":86,"TotalProperty":1144,"WasteAmount":"650.71"}],"success":true}
-[00:00:15.491] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:00:00.876] Server  LOG      ✓ Ready in 624ms
+[00:02:13.511] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:13.839] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:02:13.839] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:02:13.839] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.0","sv":"0.1.3","ts":1764672848670}
+[00:02:22.833] Browser LOG     month=August&year=2025&stateID=1&districtID=9&blockID=0&gpID=0&level=1
+[00:02:23.896] Browser LOG     {"count":9,"data":[{"ID":76,"Inorganic_WasteAmount":"10.40","Name":"Banarhat","Organic_WasteAmount":"10.05","TotalActiveProperty":23,"TotalProperty":416,"WasteAmount":"20.45"},{"ID":75,"Inorganic_WasteAmount":"322.45","Name":"Dhupguri","Organic_WasteAmount":"20.38","TotalActiveProperty":64,"TotalProperty":579,"WasteAmount":"342.83"},{"ID":81,"Inorganic_WasteAmount":"532.31","Name":"JALPAIGURI SADAR","Organic_WasteAmount":"311.85","TotalActiveProperty":58,"TotalProperty":737,"WasteAmount":"844.16"},{"ID":80,"Inorganic_WasteAmount":"135.19","Name":"Kranti","Organic_WasteAmount":"15.03","TotalActiveProperty":52,"TotalProperty":508,"WasteAmount":"150.22"},{"ID":88,"Inorganic_WasteAmount":"0.37","Name":"MALBAZAR","Organic_WasteAmount":"0.27","TotalActiveProperty":2,"TotalProperty":369,"WasteAmount":"0.64"},{"ID":78,"Inorganic_WasteAmount":"302.70","Name":"Matiali","Organic_WasteAmount":"418.30","TotalActiveProperty":194,"TotalProperty":1496,"WasteAmount":"721.00"},{"ID":73,"Inorganic_WasteAmount":"11975.31","Name":"Maynaguri","Organic_WasteAmount":"12845.79","TotalActiveProperty":525,"TotalProperty":9571,"WasteAmount":"24821.10"},{"ID":79,"Inorganic_WasteAmount":"890.57","Name":"Nagrakata","Organic_WasteAmount":"643.10","TotalActiveProperty":208,"TotalProperty":1094,"WasteAmount":"1533.67"},{"ID":74,"Inorganic_WasteAmount":"86.69","Name":"Rajganj","Organic_WasteAmount":"564.02","TotalActiveProperty":86,"TotalProperty":1144,"WasteAmount":"650.71"}],"success":true}
+[00:02:23.896] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:00:15.491] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:02:23.896] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:00:16.087] Browser LOG     {"count":9,"data":[{"CLUB":"0.00","Comunity Centre":"0.00","Health Center":"0.90","House":"0.00","ICDS":"0.20","LocationID":76,"LocationName":"Banarhat","Market":"10.40","Office Building":"0.00","Others":"0.00","Religious Place":"0.00","School":"8.95","Shop":"0.00"},{"CLUB":"0.00","Comunity Centre":"2.80","Health Center":"1.41","House":"1.90","ICDS":"0.00","LocationID":75,"LocationName":"Dhupguri","Market":"291.35","Office Building":"11.66","Others":"0.00","Religious Place":"0.00","School":"21.99","Shop":"11.72"},{"CLUB":"3.00","Comunity Centre":"0.00","Health Center":"159.14","House":"1.20","ICDS":"0.00","LocationID":81,"LocationName":"JALPAIGURI SADAR","Market":"68.20","Office Building":"23.32","Others":"53.30","Religious Place":"0.00","School":"46.98","Shop":"489.02"},{"CLUB":"0.00","Comunity Centre":"0.00","Health Center":"10.95","House":"4.40","ICDS":"0.50","LocationID":80,"LocationName":"Kranti","Market":"42.95","Office Building":"0.00","Others":"0.00","Religious Place":"0.95","School":"31.25","Shop":"59.22"},{"CLUB":"0.00","Comunity Centre":"0.00","Health Center":"0.00","House":"0.00","ICDS":"0.00","LocationID":88,"LocationName":"MALBAZAR","Market":"0.00","Office Building":"0.14","Others":"0.00","Religious Place":"0.00","School":"0.50","Shop":"0.00"},{"CLUB":"0.00","Comunity Centre":"17.60","Health Center":"2.10","House":"77.57","ICDS":"40.67","LocationID":78,"LocationName":"Matiali","Market":"102.35","Office Building":"0.00","Others":"5.00","Religious Place":"26.55","School":"26.58","Shop":"422.58"},{"CLUB":"0.00","Comunity Centre":"21404.00","Health Center":"0.00","House":"2314.04","ICDS":"0.00","LocationID":73,"LocationName":"Maynaguri","Market":"546.31","Office Building":"3.53","Others":"0.00","Religious Place":"0.00","School":"310.60","Shop":"242.62"},{"CLUB":"0.00","Comunity Centre":"0.00","Health Center":"12.26","House":"643.75","ICDS":"5.50","LocationID":79,"LocationName":"Nagrakata","Market":"53.50","Office Building":"5.50","Others":"0.00","Religious Place":"1.00","School":"38.00","Shop":"774.16"},{"CLUB":"0.00","Comunity Centre":"1.27","Health Center":"1.10","House":"161.75","ICDS":"0.00","LocationID":74,"LocationName":"Rajganj","Market":"233.93","Office Building":"8.88","Others":"0.00","Religious Place":"7.93","School":"17.94","Shop":"217.91"}],"success":true}
-[00:00:16.088] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:02:24.506] Browser LOG     {"count":9,"data":[{"CLUB":"0.00","Comunity Centre":"0.00","Health Center":"0.90","House":"0.00","ICDS":"0.20","LocationID":76,"LocationName":"Banarhat","Market":"10.40","Office Building":"0.00","Others":"0.00","Religious Place":"0.00","School":"8.95","Shop":"0.00"},{"CLUB":"0.00","Comunity Centre":"2.80","Health Center":"1.41","House":"1.90","ICDS":"0.00","LocationID":75,"LocationName":"Dhupguri","Market":"291.35","Office Building":"11.66","Others":"0.00","Religious Place":"0.00","School":"21.99","Shop":"11.72"},{"CLUB":"3.00","Comunity Centre":"0.00","Health Center":"159.14","House":"1.20","ICDS":"0.00","LocationID":81,"LocationName":"JALPAIGURI SADAR","Market":"68.20","Office Building":"23.32","Others":"53.30","Religious Place":"0.00","School":"46.98","Shop":"489.02"},{"CLUB":"0.00","Comunity Centre":"0.00","Health Center":"10.95","House":"4.40","ICDS":"0.50","LocationID":80,"LocationName":"Kranti","Market":"42.95","Office Building":"0.00","Others":"0.00","Religious Place":"0.95","School":"31.25","Shop":"59.22"},{"CLUB":"0.00","Comunity Centre":"0.00","Health Center":"0.00","House":"0.00","ICDS":"0.00","LocationID":88,"LocationName":"MALBAZAR","Market":"0.00","Office Building":"0.14","Others":"0.00","Religious Place":"0.00","School":"0.50","Shop":"0.00"},{"CLUB":"0.00","Comunity Centre":"17.60","Health Center":"2.10","House":"77.57","ICDS":"40.67","LocationID":78,"LocationName":"Matiali","Market":"102.35","Office Building":"0.00","Others":"5.00","Religious Place":"26.55","School":"26.58","Shop":"422.58"},{"CLUB":"0.00","Comunity Centre":"21404.00","Health Center":"0.00","House":"2314.04","ICDS":"0.00","LocationID":73,"LocationName":"Maynaguri","Market":"546.31","Office Building":"3.53","Others":"0.00","Religious Place":"0.00","School":"310.60","Shop":"242.62"},{"CLUB":"0.00","Comunity Centre":"0.00","Health Center":"12.26","House":"643.75","ICDS":"5.50","LocationID":79,"LocationName":"Nagrakata","Market":"53.50","Office Building":"5.50","Others":"0.00","Religious Place":"1.00","School":"38.00","Shop":"774.16"},{"CLUB":"0.00","Comunity Centre":"1.27","Health Center":"1.10","House":"161.75","ICDS":"0.00","LocationID":74,"LocationName":"Rajganj","Market":"233.93","Office Building":"8.88","Others":"0.00","Religious Place":"7.93","School":"17.94","Shop":"217.91"}],"success":true}
+[00:02:24.506] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:00:16.088] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:48.330] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:48.330] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:49.827] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:49.827] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:52.195] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:52.195] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:52.858] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:52.858] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:58.927] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:58.927] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:59.880] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:01:59.880] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:02:01.326] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:02:01.327] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:02:24.507] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
