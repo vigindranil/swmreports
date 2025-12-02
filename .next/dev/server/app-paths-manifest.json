@@ -1,0 +1,5 @@
+{
+  "/api/property-waste-report/route": "app/api/property-waste-report/route.js",
+  "/api/waste-report/route": "app/api/waste-report/route.js",
+  "/page": "app/page.js"
+}

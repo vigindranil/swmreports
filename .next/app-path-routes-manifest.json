@@ -1,0 +1,7 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/property-waste-report/route": "/api/property-waste-report",
+  "/api/waste-report/route": "/api/waste-report",
+  "/page": "/"
+}
