@@ -5,6 +5,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Download, X, Loader2 } from "lucide-react"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface PropertyDetail {
   ID: number
@@ -147,11 +149,20 @@ export default function DetailsModal({ isOpen, onClose, selectedLocation, filter
     document.body.removeChild(link)
   }
 
+  const chartData = data.map((item) => ({
+    name: item.PropertyTypeName,
+    organic: Number.parseFloat(item.Organic_WasteAmount) || 0,
+    inorganic: Number.parseFloat(item.Inorganic_WasteAmount) || 0,
+    total: Number.parseFloat(item.WasteAmount) || 0,
+    totalProperty: item.TotalProperty,
+    activeProperty: item.TotalActiveProperty,
+  }))
+
   return (
-  <Dialog open={isOpen} onOpenChange={onClose}>
-    <DialogContent className="!max-w-[95vw] w-[95vw] max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="sticky top-0 bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 z-10 pb-6 -mx-6 px-6 -mt-6 pt-6 border-b-2 border-emerald-200">
-          <div className="flex items-center justify-between">
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="!max-w-[95vw] w-[95vw] max-h-[90vh] overflow-y-auto flex flex-col">
+        <DialogHeader className="pb-6 border-b-2 border-emerald-200 flex-shrink-0">
+          <div className="flex items-center justify-between gap-4">
             <div className="flex-1">
               <DialogTitle className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 Property-wise Waste Details
@@ -171,7 +182,7 @@ export default function DetailsModal({ isOpen, onClose, selectedLocation, filter
             <Button
               onClick={exportToExcel}
               disabled={data.length === 0 || loading}
-              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white ml-4 shadow-lg hover:shadow-xl transition-all duration-200 px-6 py-6 text-base"
+              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 px-6 py-6 text-base flex-shrink-0"
             >
               <Download className="w-5 h-5 mr-2" />
               Export to Excel
@@ -180,7 +191,7 @@ export default function DetailsModal({ isOpen, onClose, selectedLocation, filter
         </DialogHeader>
 
         {loading ? (
-          <div className="flex items-center justify-center py-12">
+          <div className="flex items-center justify-center py-12 flex-grow">
             <div className="flex flex-col items-center gap-3">
               <Loader2 className="w-8 h-8 text-emerald-600 animate-spin" />
               <p className="text-slate-600">Loading property details...</p>
@@ -199,8 +210,73 @@ export default function DetailsModal({ isOpen, onClose, selectedLocation, filter
             </CardContent>
           </Card>
         ) : (
-          <>
-            <div className="space-y-6 mt-2">
+          <div className="flex flex-col flex-grow overflow-y-auto">
+            <div className="space-y-6 mt-2 flex-grow">
+              {/* Charts Section */}
+              <div className="bg-white rounded-xl overflow-hidden border-2 border-slate-200 shadow-lg p-6">
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-slate-800 mb-4">Waste Analysis</h3>
+                  <Tabs defaultValue="waste" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2 mb-6">
+                      <TabsTrigger value="waste" className="text-sm">
+                        Waste Breakdown
+                      </TabsTrigger>
+                      <TabsTrigger value="properties" className="text-sm">
+                        Properties
+                      </TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent value="waste" className="mt-6">
+                      <div className="h-80 w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                            <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} />
+                            <YAxis label={{ value: "Waste Amount (kg)", angle: -90, position: "insideLeft" }} />
+                            <Tooltip
+                              contentStyle={{
+                                backgroundColor: "var(--card)",
+                                border: "1px solid var(--border)",
+                                borderRadius: "8px",
+                              }}
+                              formatter={(value) => `${(value as number).toFixed(2)} kg`}
+                            />
+                            <Legend />
+                            <Bar dataKey="organic" fill="#0E5892" name="Organic Waste" radius={[8, 8, 0, 0]} />
+                            <Bar dataKey="inorganic" fill="#06B6D4" name="Inorganic Waste" radius={[8, 8, 0, 0]} />
+                            <Bar dataKey="total" fill="#3B82F6" name="Total Waste" radius={[8, 8, 0, 0]} />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="properties" className="mt-6">
+                      <div className="h-80 w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                            <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} />
+                            <YAxis label={{ value: "Number of Properties", angle: -90, position: "insideLeft" }} />
+                            <Tooltip
+                              contentStyle={{
+                                backgroundColor: "var(--card)",
+                                border: "1px solid var(--border)",
+                                borderRadius: "8px",
+                              }}
+                              formatter={(value) => (value as number).toString()}
+                            />
+                            <Legend />
+                            <Bar dataKey="totalProperty" fill="#22C55E" name="Total Properties" radius={[8, 8, 0, 0]} />
+                            <Bar dataKey="activeProperty" fill="#A855F7" name="Active Properties" radius={[8, 8, 0, 0]} />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </div>
+              </div>
+
+              {/* Table Section */}
               <div className="bg-white rounded-xl overflow-hidden border-2 border-slate-200 shadow-lg">
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -279,7 +355,7 @@ export default function DetailsModal({ isOpen, onClose, selectedLocation, filter
               </div>
             </div>
 
-            <div className="flex gap-4 justify-end mt-8 pt-6 border-t-2 border-slate-200">
+            <div className="flex gap-4 justify-end mt-8 pt-6 border-t-2 border-slate-200 flex-shrink-0">
               <Button 
                 variant="outline" 
                 onClick={onClose}
@@ -288,7 +364,7 @@ export default function DetailsModal({ isOpen, onClose, selectedLocation, filter
                 Close
               </Button>
             </div>
-          </>
+          </div>
         )}
       </DialogContent>
     </Dialog>
