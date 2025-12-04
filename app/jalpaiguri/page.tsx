@@ -570,10 +570,10 @@ export default function JalpaiguriWasteManagement() {
                 </p>
                 <div className="border-l-4 border-orange-600 pl-4">
                   <p className="font-bold text-gray-900">
-                    Shri Moumita Godara Basu, IAS
+                  Shri Raunak Agarwal, IAS
                   </p>
                   <p className="text-orange-600">
-                    District Magistrate, Jalpaiguri
+                  Additional District Magistrate(ZP), Jalpaiguri
                   </p>
                 </div>
               </div>
