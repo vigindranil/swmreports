@@ -1,340 +1,273 @@
 "use client"
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BarChart3, TrendingUp, Package, RefreshCw, Download, Calendar, MapPin } from "lucide-react"
-import FilterSection from "@/components/filter-section"
-import DataTable from "@/components/data-table"
-import WasteChart from "@/components/waste-chart"
-import LocationWasteTable from "@/components/location-waste-table"
-import LocationWasteChart from "@/components/location-waste-chart"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { BarChart3, Zap, TrendingUp, MapPin, Calendar, DownloadCloud, ArrowRight, Check, Sparkles } from "lucide-react"
+import Link from "next/link"
 
-interface WasteData {
-  ID: number
-  Name: string
-  Organic_WasteAmount: string
-  Inorganic_WasteAmount: string
-  WasteAmount: string
-  TotalProperty: number
-  TotalActiveProperty: number
-}
-
-interface LocationWasteData {
-  LocationID: number
-  LocationName: string
-  [key: string]: string | number
-}
-
-interface ApiResponse {
-  success: boolean
-  data: WasteData[]
-  count: number
-  error?: string
-}
-
-interface LocationWasteApiResponse {
-  success: boolean
-  data: LocationWasteData[]
-  count: number
-  error?: string
-}
-
-export default function Page() {
-  const [filters, setFilters] = useState({
-    month: "August",
-    year: 2025,
-    stateID: 1,
-    districtID: 0,
-    blockID: 0,
-    gpID: 0,
-    level: 1,
-    startDate: undefined as Date | undefined,
-    endDate: undefined as Date | undefined,
-  })
-
-  const [data, setData] = useState<WasteData[]>([])
-  const [locationWasteData, setLocationWasteData] = useState<LocationWasteData[]>([])
-  const [loading, setLoading] = useState(false)
-  const [reportTitle, setReportTitle] = useState("State Wise Collection Report")
-
-  const fetchData = async () => {
-    setLoading(true)
-    try {
-      const params = new URLSearchParams({
-        month: filters.month,
-        year: filters.year.toString(),
-        stateID: filters.stateID.toString(),
-        districtID: filters.districtID.toString(),
-        blockID: filters.blockID.toString(),
-        gpID: filters.gpID.toString(),
-        level: filters.level.toString(),
-      })
-
-      // Add dates if selected
-      if (filters.startDate) {
-        params.append("startDate", filters.startDate.toISOString().split("T")[0])
-      }
-      if (filters.endDate) {
-        params.append("endDate", filters.endDate.toISOString().split("T")[0])
-      }
-
-      console.log(params.toString());
-
-      // Fetch waste report data
-      const response = await fetch(`/api/waste-report?${params}`)
-      const result: ApiResponse = await response.json()
-      console.log(result)
-
-      if (result.success) {
-        setData(result.data)
-      } else {
-        console.error("[v0] API error:", result.error)
-      }
-
-      // Fetch location-wise property waste report data
-      const locationResponse = await fetch(`/api/location-wise-property-waste-report?${params}`)
-      const locationResult: LocationWasteApiResponse = await locationResponse.json()
-      console.log(locationResult)
-
-      if (locationResult.success) {
-        setLocationWasteData(locationResult.data)
-      } else {
-        console.error("[v0] Location API error:", locationResult.error)
-      }
-    } catch (error) {
-      console.error("[v0] Error fetching data:", error)
-    } finally {
-      setLoading(false)
+export default function LandingPage() {
+  const features = [
+    {
+      icon: BarChart3,
+      title: "Advanced Analytics",
+      description: "Real-time waste collection data with detailed charts and visualizations"
+    },
+    {
+      icon: MapPin,
+      title: "Location-Based Tracking",
+      description: "Track waste collection across multiple locations, districts, and blocks"
+    },
+    {
+      icon: Calendar,
+      title: "Date Range Filtering",
+      description: "Analyze data by specific time periods with flexible date range selection"
+    },
+    {
+      icon: DownloadCloud,
+      title: "Export Reports",
+      description: "Download waste collection reports in Excel format for further analysis"
+    },
+    {
+      icon: TrendingUp,
+      title: "Property-wise Breakdown",
+      description: "Detailed waste statistics by property type across all locations"
+    },
+    {
+      icon: Zap,
+      title: "Real-time Updates",
+      description: "Get the latest waste collection data instantly with fast API integration"
     }
-  }
+  ]
 
-  const generateReportTitle = (currentFilters: typeof filters) => {
-    if (currentFilters.districtID === 0) return "State Wise Collection Report"
-    if (currentFilters.blockID === 0) return "District Wise Collection Report"
-    if (currentFilters.gpID === 0) return "Block Wise Collection Report"
-    return "Village/GP Wise Collection Report"
-  }
-
-  const handleFilterChange = (newFilters: typeof filters) => {
-    setFilters(newFilters)
-    const newTitle = generateReportTitle(newFilters)
-    setReportTitle(newTitle)
-  }
-
-  // Calculate statistics
-  const stats = data.length > 0 ? {
-    totalWaste: data.reduce((sum, item) => sum + parseFloat(item.WasteAmount || "0"), 0).toFixed(2),
-    totalOrganic: data.reduce((sum, item) => sum + parseFloat(item.Organic_WasteAmount || "0"), 0).toFixed(2),
-    totalInorganic: data.reduce((sum, item) => sum + parseFloat(item.Inorganic_WasteAmount || "0"), 0).toFixed(2),
-    totalProperties: data.reduce((sum, item) => sum + item.TotalProperty, 0),
-  } : null
+  const stats = [
+    { value: "100+", label: "Locations Tracked" },
+    { value: "11", label: "Property Types" },
+    { value: "24/7", label: "Live Monitoring" },
+    { value: "4+", label: "Years of Data" }
+  ]
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-emerald-50/20">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
-        {/* Enhanced Header */}
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl shadow-lg">
-              <Package className="w-7 h-7 text-white" />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                Waste Management Analytics
-              </h1>
-              <p className="text-slate-600 mt-1">Comprehensive waste collection and reporting dashboard</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Filter Section */}
-        <div className="mb-8">
-          <FilterSection onFilterChange={handleFilterChange} onFetch={fetchData} isLoading={loading} />
-        </div>
-
-        {/* Statistics Cards */}
-        {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-emerald-500 to-teal-600 text-white overflow-hidden relative">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-              <CardHeader className="pb-3">
-                <CardDescription className="text-emerald-50 flex items-center gap-2">
-                  <Package className="w-4 h-4" />
-                  Total Waste Collected
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold">{stats.totalWaste} kg</div>
-                <p className="text-emerald-100 text-sm mt-1">All waste types</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader className="pb-3">
-                <CardDescription className="flex items-center gap-2 text-slate-600">
-                  <TrendingUp className="w-4 h-4 text-green-600" />
-                  Organic Waste
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-green-600">{stats.totalOrganic} kg</div>
-                <p className="text-slate-600 text-sm mt-1">Biodegradable materials</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader className="pb-3">
-                <CardDescription className="flex items-center gap-2 text-slate-600">
-                  <BarChart3 className="w-4 h-4 text-orange-600" />
-                  Inorganic Waste
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-orange-600">{stats.totalInorganic} kg</div>
-                <p className="text-slate-600 text-sm mt-1">Non-biodegradable materials</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader className="pb-3">
-                <CardDescription className="flex items-center gap-2 text-slate-600">
-                  <MapPin className="w-4 h-4 text-blue-600" />
-                  Total Properties
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-blue-600">{stats.totalProperties}</div>
-                <p className="text-slate-600 text-sm mt-1">Registered locations</p>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {/* Report Title Section */}
-        {data.length > 0 && (
-          <div className="mb-6 p-6 bg-white rounded-xl shadow-md border border-slate-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Calendar className="w-5 h-5 text-emerald-600" />
-                  <h2 className="text-2xl font-bold text-slate-800">{reportTitle}</h2>
-                </div>
-                <p className="text-slate-600 flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium">
-                    <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-                    {data.length} {data.length === 1 ? "record" : "records"}
-                  </span>
-                  <span className="text-slate-400">•</span>
-                  <span>{filters.month} {filters.year}</span>
-                </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg">
+                <BarChart3 className="w-6 h-6 text-white" />
               </div>
+              <span className="text-xl font-bold text-white">SWM Reports</span>
             </div>
+            <Link href="/dashboard">
+              <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white">
+                Launch Dashboard
+              </Button>
+            </Link>
           </div>
-        )}
+        </div>
+      </nav>
 
-        {/* Chart and Table Grid */}
-        <div className="grid grid-cols-1 gap-6">
-          {/* Chart Section */}
-          {data.length > 0 && (
-            <Card className="border-0 shadow-xl bg-white overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="text-slate-800 flex items-center gap-2">
-                      <BarChart3 className="w-5 h-5 text-emerald-600" />
-                      Waste Collection Overview
-                    </CardTitle>
-                    <CardDescription className="mt-1">Organic vs Inorganic waste distribution across regions</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
+      {/* Hero Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+        <div className="text-center space-y-6 mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+            <Sparkles className="w-4 h-4 text-emerald-400" />
+            <span className="text-sm font-medium text-emerald-300">Welcome to SWM Dashboard</span>
+          </div>
+          
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            Solid Waste Management<br />
+            <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+              Analytics Platform
+            </span>
+          </h1>
+          
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Comprehensive waste collection tracking and reporting system with real-time data analysis, location-based insights, and powerful export capabilities.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <Link href="/dashboard">
+              <Button size="lg" className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-700 hover:via-teal-700 hover:to-cyan-700 text-white text-lg px-8 h-12 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                Start Exploring
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-2 border-slate-700 hover:bg-slate-800 text-slate-200 text-lg px-8 h-12 rounded-lg"
+            >
+              Learn More
+            </Button>
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+          {stats.map((stat, index) => (
+            <Card key={index} className="bg-gradient-to-br from-slate-800 to-slate-900 border-slate-700 hover:border-emerald-500/50 transition-colors">
               <CardContent className="pt-6">
-                <WasteChart data={data} />
+                <div className="text-center">
+                  <p className="text-3xl sm:text-4xl font-bold text-transparent bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text mb-2">
+                    {stat.value}
+                  </p>
+                  <p className="text-slate-400 text-sm sm:text-base">{stat.label}</p>
+                </div>
               </CardContent>
             </Card>
-          )}
+          ))}
+        </div>
+      </section>
 
-          {/* Data Table Section */}
-          {data.length > 0 && (
-            <div className="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
-              <DataTable data={data} reportTitle={reportTitle} filters={filters} />
-            </div>
-          )}
+      {/* Features Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+            Powerful Features
+          </h2>
+          <p className="text-xl text-slate-400">
+            Everything you need to manage and analyze waste collection data
+          </p>
         </div>
 
-        {/* Location-wise Property Waste Report Section */}
-        {locationWasteData.length > 0 && (
-          <div className="mt-12">
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg shadow-lg">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-slate-800">Location-wise Property Waste Analysis</h2>
-                  <p className="text-slate-600 mt-1">Property-type wise waste collection across locations</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Location Chart Section */}
-            <Card className="border-0 shadow-xl bg-white overflow-hidden mb-8">
-              <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="text-slate-800 flex items-center gap-2">
-                      <BarChart3 className="w-5 h-5 text-blue-600" />
-                      Location Wise Waste Distribution
-                    </CardTitle>
-                    <CardDescription className="mt-1">Property-type wise waste analysis by location</CardDescription>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => {
+            const Icon = feature.icon
+            return (
+              <Card key={index} className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 group">
+                <CardContent className="pt-8">
+                  <div className="mb-4 p-3 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-lg w-fit group-hover:from-emerald-500/30 group-hover:to-teal-500/30 transition-colors">
+                    <Icon className="w-6 h-6 text-emerald-400" />
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <LocationWasteChart data={locationWasteData} />
-              </CardContent>
-            </Card>
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-400">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+      </section>
 
-            {/* Location Data Table Section */}
-            <div className="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
-              <LocationWasteTable data={locationWasteData} reportTitle="Location-wise Property Waste Report" />
+      {/* Google Map Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+            Coverage Map
+          </h2>
+          <p className="text-xl text-slate-400">
+            View waste collection locations and coverage areas
+          </p>
+        </div>
+
+        <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700 overflow-hidden">
+          <CardContent className="p-0">
+            <div className="w-full h-screen max-h-[600px] rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/d/embed?mid=1Nuz2ciRGatPDOQIKL5NlnD79xFoSRZM&usp=sharing"
+                width="100%"
+                height="600"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="mt-8 p-6 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-lg border border-emerald-500/30">
+          <p className="text-slate-300 text-center">
+            This interactive map shows all the locations where our waste management system is operational. 
+            Click on the markers to view detailed information about each location.
+          </p>
+        </div>
+      </section>
+
+      {/* Key Capabilities Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700">
+          <CardContent className="pt-12 pb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-10 text-center">
+              Key Capabilities
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {[
+                {
+                  title: "Hierarchical Data Navigation",
+                  items: ["State", "District", "Block", "Gram Panchayat level drilling"]
+                },
+                {
+                  title: "Advanced Filtering",
+                  items: ["Month and year selection", "Date range filtering", "Collection level categorization"]
+                },
+                {
+                  title: "Property Type Analysis",
+                  items: ["11 different property types", "Organic/Inorganic breakdown", "Active property tracking"]
+                },
+                {
+                  title: "Data Export",
+                  items: ["Excel format reports", "CSV downloads", "Batch export capability"]
+                }
+              ].map((category, index) => (
+                <div key={index}>
+                  <h3 className="text-lg font-bold text-emerald-400 mb-4">{category.title}</h3>
+                  <ul className="space-y-3">
+                    {category.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-center gap-3 text-slate-300">
+                        <Check className="w-5 h-5 text-teal-400 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* CTA Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <Card className="bg-gradient-to-r from-emerald-600/20 via-teal-600/20 to-cyan-600/20 border-emerald-500/30 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+          <CardContent className="pt-12 pb-12 relative z-10">
+            <div className="text-center space-y-6">
+              <h2 className="text-4xl font-bold text-white">
+                Ready to Get Started?
+              </h2>
+              <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+                Access comprehensive waste management analytics and reporting tools in seconds.
+              </p>
+              <Link href="/dashboard">
+                <Button size="lg" className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-700 hover:via-teal-700 hover:to-cyan-700 text-white text-lg px-10 h-12 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                  Open Dashboard
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-800 bg-slate-950 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between text-slate-400 text-sm">
+            <p>&copy; 2025 SWM Reports. All rights reserved.</p>
+            <div className="flex items-center gap-6 mt-6 sm:mt-0">
+              <a href="#" className="hover:text-emerald-400 transition-colors">Privacy</a>
+              <a href="#" className="hover:text-emerald-400 transition-colors">Terms</a>
+              <a href="#" className="hover:text-emerald-400 transition-colors">Support</a>
             </div>
           </div>
-        )}
-
-        {/* Enhanced Empty State */}
-        {data.length === 0 && !loading && (
-          <Card className="border-0 shadow-xl text-center py-16 bg-gradient-to-br from-white to-slate-50">
-            <CardContent>
-              <div className="flex flex-col items-center gap-4">
-                <div className="p-4 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-full">
-                  <BarChart3 className="w-12 h-12 text-emerald-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800 mb-2">No Data Available</h3>
-                  <p className="text-slate-600 text-lg mb-4">Select your filters and click "Fetch Report" to load waste collection data</p>
-                  <div className="inline-flex items-center gap-2 text-sm text-slate-500">
-                    <RefreshCw className="w-4 h-4" />
-                    <span>Configure filters above to get started</span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Loading State */}
-        {loading && (
-          <Card className="border-0 shadow-xl text-center py-16">
-            <CardContent>
-              <div className="flex flex-col items-center gap-4">
-                <RefreshCw className="w-12 h-12 text-emerald-600 animate-spin" />
-                <p className="text-slate-600 text-lg">Loading waste collection data...</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </div>
-    </main>
+        </div>
+      </footer>
+    </div>
   )
 }

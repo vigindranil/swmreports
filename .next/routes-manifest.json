@@ -56,6 +56,12 @@
       "regex": "^/api/waste\\-report(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/waste\\-report(?:/)?$"
+    },
+    {
+      "page": "/dashboard",
+      "regex": "^/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard(?:/)?$"
     }
   ],
   "dataRoutes": [],

@@ -1,8 +1,10 @@
 {
+  "/(landing)/page": "/",
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
   "/api/location-wise-property-waste-report/route": "/api/location-wise-property-waste-report",
   "/api/property-waste-report/route": "/api/property-waste-report",
   "/api/waste-report/route": "/api/waste-report",
+  "/dashboard/page": "/dashboard",
   "/page": "/"
 }
