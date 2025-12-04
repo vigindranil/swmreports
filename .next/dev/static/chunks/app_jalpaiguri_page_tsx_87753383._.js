@@ -251,7 +251,7 @@ function JalpaiguriWasteManagement() {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "flex flex-col items-center",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "w-14 h-14 md:w-40 md:h-20 overflow-hidden",
+                                                    className: "w-14 h-14 md:w-50 md:h-30 overflow-hidden",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                                         src: "/sb.png",
                                                         alt: "Swachh Bharat Logo",
@@ -1347,7 +1347,7 @@ function JalpaiguriWasteManagement() {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "font-bold text-gray-900",
-                                                    children: "Shri Moumita Godara Basu, IAS"
+                                                    children: "Shri Raunak Agarwal, IAS"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/jalpaiguri/page.tsx",
                                                     lineNumber: 572,
@@ -1355,7 +1355,7 @@ function JalpaiguriWasteManagement() {
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-orange-600",
-                                                    children: "District Magistrate, Jalpaiguri"
+                                                    children: "Additional District Magistrate(ZP), Jalpaiguri"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/jalpaiguri/page.tsx",
                                                     lineNumber: 575,

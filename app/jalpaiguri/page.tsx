@@ -137,7 +137,7 @@ export default function JalpaiguriWasteManagement() {
             <div className="absolute right-0 md:right-4 flex gap-3 md:gap-6">
               {/* Swachh Bharat Logo */}
               <div className="flex flex-col items-center">
-                <div className="w-14 h-14 md:w-40 md:h-20 overflow-hidden">
+                <div className="w-14 h-14 md:w-50 md:h-30 overflow-hidden">
                   <img
                     src="/sb.png" // Put swachh bharat logo inside public/sb.png
                     alt="Swachh Bharat Logo"

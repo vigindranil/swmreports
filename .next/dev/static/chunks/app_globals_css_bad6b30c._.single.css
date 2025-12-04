@@ -6030,6 +6030,12 @@
   }
 
   @media (min-width: 48rem) {
+    .md\:h-30 {
+      height: calc(var(--spacing) * 30);
+    }
+  }
+
+  @media (min-width: 48rem) {
     .md\:h-40 {
       height: calc(var(--spacing) * 40);
     }
@@ -6068,6 +6074,12 @@
   @media (min-width: 48rem) {
     .md\:w-44 {
       width: calc(var(--spacing) * 44);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .md\:w-50 {
+      width: calc(var(--spacing) * 50);
     }
   }
 
